@@ -64,19 +64,21 @@
                     <table class="table">
                         <thead>
                             <tr>
-                                <th>Name</th>
-                                <th>Description</th>
-                                <th>Price</th>
                                 <th>Category</th>
+                                <th>Name</th>
+                                <th width="40%">Description</th>
+                                <th>Price</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php foreach ($products as $product) {?>
                             <tr>
+                                <td><?= $product->getCategory()->getName()?></td>
                                 <td><?= $product->getNome()?></td>
                                 <td><?= $product->getDescricao()?></td>
                                 <td>R$<?= $product->getPreco()?></td>
-                                <td><?= $product->getCategory()->getName()?></td>
+                                <td><a class="btn btn-primary" href="/<?= $product->getId() ?>">Detalhe</a></td>
                             </tr>
                             <?php } ;?>
                         </tbody>
@@ -85,6 +87,27 @@
             </div>
         </div>
     </div>
+    <?php if(isset($productDetails)){ ?>
+
+        <div class="detail-wraper <?php if($productDetails){echo 'show'; } ?>">
+
+            <div class="card-product-container">
+                <div class="card-product-title">
+                    <h2><?= $productDetails->getNome()?></h2>
+                </div>
+                <div class="product-price">
+                    <h3>R$<?= $productDetails->getPreco()?></h3>
+                </div>
+                <div class="product-description">
+                    <p><?= $productDetails->getDescricao()?></p>
+                </div>
+                <a href="/" class="btn btn-secondary">Fexar</a>
+                <a href="/editar/<?= $productDetails->getId()?>" class="btn btn-primary">Editar</a>
+            </div>
+
+        </div>
+    
+    <?php } ?>
 
 </div>
 

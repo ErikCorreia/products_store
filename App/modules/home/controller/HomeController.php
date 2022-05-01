@@ -8,19 +8,23 @@
     class HomeController
     {
 
-        public function getProduct()
+        public function getProducts($req, $res, $args)
         {
             require_once "bootstrap.php";
-            $product = new Product();
 
+            $product = new Product();
             $products = $entityManager->getRepository(Product::class)->findAll();
             $categories = $entityManager->getRepository(Category::class)->findAll();
+
+            if (isset($args['productId'])){
+                $productDetails = $entityManager->getRepository(Product::class)->find($args['productId']);
+            }
 
             include __DIR__.'/../templates/home.php';
 
         }
 
-        public function postProduct()
+        public function postProducts()
         {
 
             require_once "bootstrap.php";
